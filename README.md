@@ -7,10 +7,7 @@
 
 3. Then create a Cl/CD pipeline using Travis/Github Actions/Jenkins to build and deploy the container in the Linux VM. 
 
-4. Then create a README with all necessary steps in order to run your automation. We would like to see your considerations for credential handling in this scenario. 
-The challenge is expected to take between 2-4 hours. 
-
-Please send us the link to the github repo with the solution. And please do confirm receipt of this message and let us know if you can meet the deadline. 
+4. Then create a README with all necessary steps in order to run your automation. 
 
 
 ## Preparation
