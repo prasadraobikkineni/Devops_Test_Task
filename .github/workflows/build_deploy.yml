@@ -17,8 +17,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY_DEPLOYER }}
           port: 22
-          source: "app/Dockerfile,app/index.html"
-          target: "app"
+          source: "app/*"
+          target: "."
 
       - name: Deploy
         uses: appleboy/ssh-action@master
