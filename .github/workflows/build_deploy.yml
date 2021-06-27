@@ -1,0 +1,33 @@
+name: build_deploy
+
+on: [workflow_dispatch]
+
+jobs:
+  tasks:
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pipeline code
+        uses: actions/checkout@v2
+
+      - name: Copy file via ssh 
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST_01 }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY_DEPLOYER }}
+          port: 22
+          source: "app/Dockerfile,app/index.html"
+          target: "app"
+
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST_01 }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY_DEPLOYER }}
+          port: 22
+          script: |
+            sudo docker build -t nginx:hello -f app/Dockerifle app/.
+            sudo docker rm -f nginx-hello || echo "container nginx-hello not found"
+            sudo docker run -d -p 80:80 --name nginx-hello nginx:hello
