@@ -28,6 +28,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY_DEPLOYER }}
           port: 22
           script: |
+            cd app
             sudo docker build -t nginx:hello -f app/Dockerifle app/.
             sudo docker rm -f nginx-hello || echo "container nginx-hello not found"
             sudo docker run -d -p 80:80 --name nginx-hello nginx:hello
